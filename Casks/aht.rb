@@ -36,7 +36,8 @@ cask "aht" do
     or open aht.app and accept "Set Up aht on This Mac".
     Then tether this Mac's existing projects:
       aht adopt --apply
-    Installed with --no-quarantine? Then the app opens without a Gatekeeper
-    prompt; otherwise allow it once under System Settings > Privacy & Security.
+    The app is ad-hoc signed, so macOS blocks its first launch: allow it once
+    under System Settings > Privacy & Security > Open Anyway, or run
+      xattr -dr com.apple.quarantine "#{appdir}/aht.app"
   EOS
 end
