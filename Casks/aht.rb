@@ -12,22 +12,22 @@ cask "aht" do
     strategy :github_latest
   end
 
-  depends_on macos: ">= :ventura"
+  depends_on macos: :ventura
 
   app "aht.app"
   binary "#{appdir}/aht.app/Contents/Resources/bin/aht"
 
   uninstall quit:   "com.aht.app",
             script: {
-              executable: "#{appdir}/aht.app/Contents/Resources/bin/aht",
-              args:       ["uninstall"],
+              executable:   "#{appdir}/aht.app/Contents/Resources/bin/aht",
+              args:         ["uninstall"],
               must_succeed: false,
             }
 
   zap trash: [
     "~/.aht",
-    "~/Library/LaunchAgents/com.aht.watcher.plist",
     "~/Library/LaunchAgents/com.aht.tray.plist",
+    "~/Library/LaunchAgents/com.aht.watcher.plist",
   ]
 
   caveats <<~EOS
