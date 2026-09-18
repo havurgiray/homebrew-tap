@@ -17,12 +17,10 @@ cask "aht" do
   app "aht.app"
   binary "#{appdir}/aht.app/Contents/Resources/bin/aht"
 
-  uninstall quit:   "com.aht.app",
-            script: {
-              executable:   "#{appdir}/aht.app/Contents/Resources/bin/aht",
-              args:         ["uninstall"],
-              must_succeed: false,
-            }
+  # The app is all Homebrew manages.  The watcher, the Claude Code hook and
+  # the core live under ~/.aht and are set up and removed by `aht install` /
+  # `aht uninstall`, so an upgrade never takes them down.
+  uninstall quit: "com.aht.app"
 
   zap trash: [
     "~/.aht",
@@ -33,9 +31,11 @@ cask "aht" do
   caveats <<~EOS
     Finish the setup (background watcher, Claude Code hook, `aht` command):
       aht install
-    or open aht.app and accept "Set Up aht on This Mac".
-    Then tether this Mac's existing projects:
+    or open aht.app and accept "Set Up aht on This Mac".  After an upgrade,
+    run `aht install` again (or accept the app's Update prompt) so the
+    watcher and the hook use the new core.  Then tether existing projects:
       aht adopt --apply
+    To remove aht, run `aht uninstall` BEFORE `brew uninstall --cask aht`.
     The app is ad-hoc signed, so macOS blocks its first launch: allow it once
     under System Settings > Privacy & Security > Open Anyway, or run
       xattr -dr com.apple.quarantine "#{appdir}/aht.app"
