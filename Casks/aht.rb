@@ -1,6 +1,6 @@
 cask "aht" do
-  version "0.9.2"
-  sha256 "234fc55f4c03afe3d6386a5fc2ee6831a4736ae7cebb7aaf4274b7c81b96515d"
+  version "0.10.0"
+  sha256 "c5ac2ef8325a87677b18d294bbbff8bf1d96874854d7488df1706f8ed879bf92"
 
   url "https://github.com/havurgiray/agent-history-tether/releases/download/v#{version}/aht-#{version}-macos-universal.zip"
   name "agent-history-tether"
@@ -12,6 +12,8 @@ cask "aht" do
     strategy :github_latest
   end
 
+  # handover sends projects with rsync 3; macOS ships an older one
+  depends_on formula: "rsync"
   depends_on macos: :ventura
 
   app "aht.app"
