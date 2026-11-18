@@ -1,6 +1,6 @@
 cask "aht" do
-  version "0.17.2"
-  sha256 "788c29b1d12da6aed23a576f0d17e57336e4c47fe330029d8b421540db231611"
+  version "0.17.3"
+  sha256 "25bb09c848871b832c5328a4e5af114c650ab5dfd91ba12ca8d6769cd27fe18e"
 
   url "https://github.com/havurgiray/agent-history-tether/releases/download/v#{version}/aht-#{version}-macos-universal.zip"
   name "agent-history-tether"
